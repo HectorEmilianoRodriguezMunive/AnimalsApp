@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Service extends Model
 {
@@ -12,4 +13,8 @@ class Service extends Model
         'description',
         'cost'
     ];
+
+    public function quotes():BelongsToMany{
+       return $this->belongsToMany(Quote::class);
+    }
 }

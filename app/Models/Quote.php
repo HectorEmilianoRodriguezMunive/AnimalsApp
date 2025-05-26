@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Service;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Quote extends Model
 {
@@ -20,6 +23,10 @@ class Quote extends Model
 
     public function user():BelongsTo{
         return $this->belongsTo(User::class);
+    }
+
+    public function quotes():BelongsToMany{
+        return $this->belongsToMany(Service::class);
     }
 
 }
