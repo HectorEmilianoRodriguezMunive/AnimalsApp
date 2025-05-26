@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
+            $table->date('date_quote');
+            $table->float('subtotal');
+            $table->float('IVA');
+            $table->float('total');
+            $table->string('description');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

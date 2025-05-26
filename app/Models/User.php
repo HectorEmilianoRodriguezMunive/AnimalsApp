@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function animals() : HasMany{
         return $this->hasMany(Animal::class);
     }
+
+    public function quotes() : HasMany{
+        return $this->hasMany(Quote::class);
+    }
 }
