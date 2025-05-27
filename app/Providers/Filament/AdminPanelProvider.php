@@ -27,6 +27,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->authMiddleware([
+                'web',
+                'role:admin'
+            ])
             ->colors([
                 'primary' => Color::Amber,
             ])
