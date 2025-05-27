@@ -27,7 +27,7 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\TextArea::make('description')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('cost')
