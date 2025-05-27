@@ -65,15 +65,7 @@ class QuoteResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -81,7 +73,8 @@ class QuoteResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make()
                 ->url(fn ($record) => static::getUrl('view', ['record' => $record]))
-                ->openUrlInNewTab(false)
+                ->openUrlInNewTab(false),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
