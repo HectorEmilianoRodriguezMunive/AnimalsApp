@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\ViewAction;
+
 
 class QuoteResource extends Resource
 {
@@ -77,7 +79,9 @@ class QuoteResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                ->url(fn ($record) => static::getUrl('view', ['record' => $record]))
+                ->openUrlInNewTab(false)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -99,6 +103,9 @@ class QuoteResource extends Resource
             'index' => Pages\ListQuotes::route('/'),
             'create' => Pages\CreateQuote::route('/create'),
             'edit' => Pages\EditQuote::route('/{record}/edit'),
+            'view' => Pages\ViewQuote::route('/{record}/see'),
         ];
     }
+
+   
 }
