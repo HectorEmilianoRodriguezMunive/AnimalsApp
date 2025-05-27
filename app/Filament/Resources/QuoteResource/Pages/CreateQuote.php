@@ -25,7 +25,7 @@ class CreateQuote extends CreateRecord implements HasForms
             ->schema([
                 Select::make('service_id')->label('Servicio')
                 ->options(function(){
-                    return Service::all()->pluck('name', 'id')->toArray();
+                    return Service::all()->pluck('name', 'id');
                 })
 
             ]);
