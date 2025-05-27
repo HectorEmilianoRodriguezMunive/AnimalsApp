@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->brandName('Veterinary-Admin')
             ->authMiddleware([
                 'web',
                 'role:admin'
