@@ -30,7 +30,7 @@ class ViewQuote extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('name')->label('Nombre del servicio'),
+            TextColumn::make('name')->label('Service name'),
             TextColumn::make('cost')->money('MXN')
         ];
     }
