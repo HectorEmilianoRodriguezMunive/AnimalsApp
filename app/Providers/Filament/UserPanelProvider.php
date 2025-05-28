@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,36 +17,33 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Pages\Client\ClientQuotes;
 
-
-class AdminPanelProvider extends PanelProvider
+class UserPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('dashboard')
-            ->path('dashboard')
-            ->login()
-            ->brandName('Veterinary-Admin')
-            ->authMiddleware([
-                'web',
-                'role:admin'
-            ])
+            ->id('user')
+            ->path('user')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
+            ->login()
+            ->brandName('Veterinary')
+            ->authMiddleware([
+                'web',
+                'role:client'
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\\Filament\\User\\Resources')
+            ->discoverPages(in: app_path('Filament/User/Pages'), for: 'App\\Filament\\User\\Pages')
+            ->pages([
+                ClientQuotes::class
+            ])
+            ->discoverWidgets(in: app_path('Filament/User/Widgets'), for: 'App\\Filament\\User\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-               // Widgets\FilamentInfoWidget::class,
             ])
-            ->profile()
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -59,7 +55,6 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-             ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->authMiddleware([
                 Authenticate::class,
             ]);
